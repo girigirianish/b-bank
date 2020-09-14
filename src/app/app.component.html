@@ -1,1 +1,16 @@
-<h3>Seva Blood Bank</h3>
+<mat-toolbar>
+  <span class="toolbar-flex"></span>
+  <nav mat-tab-nav-bar>
+    <a
+      mat-tab-link
+      *ngFor="let tab of tabs"
+      (click)="activeLink = tab.link"
+      [active]="activeLink == tab.link"
+      [routerLink]="tab.link"
+    >
+      {{ tab.label }}
+    </a>
+  </nav>
+  <span class="toolbar-flex"></span>
+</mat-toolbar>
+<router-outlet></router-outlet>
