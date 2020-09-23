@@ -48,7 +48,7 @@ deploy-prod:
 deploy-dev-qa:
   stage: deploy-dev-qa
   only:
-    - master
+    - develop
   image: docker:stable
   services:
     - docker:dind

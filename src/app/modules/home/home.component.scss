@@ -1,0 +1,16 @@
+.home-search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  .home-search-field {
+    margin-left: 15px;
+  }
+
+  .reset-icon {
+    margin-top: 10px;
+  }
+}
+
+.home-map-section {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,60 @@
+import { DonorsInformation } from '../models/donors-information';
+
+export const DONORS_DATA: DonorsInformation[] = [
+  {
+    id: 1,
+    name: 'Ram hari',
+    district: 'Kathmandu',
+    bloodGroup: 'A+',
+    lat: 27.700769,
+    long: 85.30014,
+  },
+  {
+    id: 2,
+    name: 'Hari Sharan',
+    district: 'Lalitpur',
+    bloodGroup: 'B+',
+    lat: 27.541967,
+    long: 85.334297,
+  },
+  {
+    id: 3,
+    name: 'Anish',
+    district: 'Pokhara',
+    bloodGroup: 'O+',
+    lat: 28.237987,
+    long: 83.995588,
+  },
+  {
+    id: 4,
+    name: 'Pranish',
+    district: 'Sinduli',
+    bloodGroup: 'AB',
+    lat: 27.256882,
+    long: 85.971322,
+  },
+  {
+    id: 5,
+    name: 'Jenish',
+    district: 'Gandaki',
+    bloodGroup: 'A+',
+    lat: 28.373204,
+    long: 84.438272,
+  },
+  {
+    id: 6,
+    name: 'Kumar',
+    district: 'SurkheRapri',
+    bloodGroup: 'A+',
+    lat: 28.517456,
+    long: 81.778702,
+  },
+  {
+    id: 7,
+    name: 'Pradip',
+    district: 'Rapti',
+    bloodGroup: 'A+',
+    lat: 28.274347,
+    long: 82.388578,
+  },
+];
