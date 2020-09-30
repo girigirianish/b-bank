@@ -1,0 +1,19 @@
+// component css goes here
+.contact-form-card {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  .contact-form-card-title {
+    text-align: center;
+  }
+}
+
+.contact-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}

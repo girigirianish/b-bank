@@ -1,0 +1,124 @@
+<div class="registration-form-card">
+  <mat-card>
+    <mat-card-title class="registration-form-card-title"
+      ><span>Save a Life Today!</span></mat-card-title
+    >
+    <mat-card-content>
+      <form class="registration-form" [formGroup]="registrationForm">
+        <mat-form-field class="full-width">
+          <mat-label>First Name</mat-label>
+          <input
+            formControlName="firstName"
+            matInput
+            placeholder="First name"
+            name="fname"
+            required
+          />
+          <mat-error
+            *ngIf="registrationForm.get('firstName').hasError('required')"
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            formControlName="lastName"
+            placeholder="Last Name"
+            name="lname"
+            required
+          />
+          <mat-error
+            *ngIf="registrationForm.get('lastName').hasError('required')"
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Address</mat-label>
+          <input
+            formControlName="address"
+            matInput
+            placeholder="Address"
+            name="address"
+            required
+          />
+          <mat-error
+            *ngIf="registrationForm.get('address').hasError('required')"
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            name="email"
+            required
+          />
+          <mat-error *ngIf="registrationForm.get('email').hasError('required')">
+            This field is required
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('email').hasError('email')">
+            Invalid email
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input
+            formControlName="phoneNumber"
+            matInput
+            placeholder="Phone Number"
+            name="text"
+            required
+          />
+          <mat-error
+            *ngIf="registrationForm.get('phoneNumber').hasError('required')"
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>District</mat-label>
+          <mat-select formControlName="district" required>
+            <mat-option
+              *ngFor="let district of districtSearchBox"
+              [value]="district.value"
+            >
+              {{ district.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="registrationForm.get('district').hasError('required')"
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Blood Group</mat-label>
+          <mat-select formControlName="bloodGroup" required>
+            <mat-option
+              *ngFor="let bloodGroup of bloodGroupSeachBox"
+              [value]="bloodGroup.value"
+            >
+              {{ bloodGroup.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="registrationForm.get('bloodGroup').hasError('required')"
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-raised-button (click)="register()" color="primary">
+            REGISTER
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

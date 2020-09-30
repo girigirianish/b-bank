@@ -6,7 +6,7 @@ import {
   DISTRICT_SELECT_BOX_ITEMS,
   SearchSelectBoxModel,
   BLOOD_GROUP_TYPE_SELECT_BOX_ITEMS,
-} from './search-models';
+} from '../search-models';
 
 @Component({
   selector: 'blood-bank-home',

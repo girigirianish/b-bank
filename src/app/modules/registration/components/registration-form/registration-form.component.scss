@@ -1,0 +1,19 @@
+// component css goes here
+.registration-form-card {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  .registration-form-card-title {
+    text-align: center;
+  }
+}
+
+.registration-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
