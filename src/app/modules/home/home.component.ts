@@ -34,12 +34,17 @@ export class HomeComponent implements OnInit {
   }
 
   private prepareMarkerDetails(): void {
-    this.markerDetails = this.donorsFilteredList.map((donor) => {
-      return {
-        lat: donor.lat,
-        long: donor.lng,
-      };
-    });
+    this.markerDetails = this.donorsFilteredList
+      .map((donor) => {
+        if (donor.lat && donor.lng) {
+          return {
+            lat: donor.lat,
+            long: donor.lng,
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
   }
 
   private async prepareBloodGroupSelectBox(): Promise<void> {
