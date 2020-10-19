@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BLOOD_BANK_REST_URL } from './app-rest.injection-token';
 
 import { ApiSecretInterceptor } from './modules/core/interceptors';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +34,12 @@ import { ApiSecretInterceptor } from './modules/core/interceptors';
   providers: [
     {
       provide: BLOOD_BANK_REST_URL,
-      useValue: 'http://dev-bloodb.sevadev.com/admin/api',
+      useFactory: () => {
+        if (environment.production) {
+          return 'http://bloodb.sevadev.com/admin/api';
+        }
+        return 'http://dev-bloodb.sevadev.com/admin/api';
+      },
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiSecretInterceptor, multi: true },
   ],
