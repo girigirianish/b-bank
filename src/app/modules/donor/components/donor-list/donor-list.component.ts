@@ -1,4 +1,11 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DonorsInformation } from '../../models';
@@ -13,6 +20,13 @@ export class DonorListComponent implements AfterViewInit {
   @Input() public set donorsInformation(newValue: DonorsInformation[]) {
     this.dataSource.data = newValue || [];
   }
+
+  @Output()
+  public sendSmsClicked: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output()
+  public sendEmailClicked: EventEmitter<number> = new EventEmitter<number>();
+
   public readonly displayedColumns: string[] = [
     'id',
     'name',
@@ -21,6 +35,7 @@ export class DonorListComponent implements AfterViewInit {
     'permanent_address',
     'temporary_address',
     'contact_no',
+    'action',
   ];
 
   public dataSource: MatTableDataSource<
@@ -36,5 +51,13 @@ export class DonorListComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.data = this.donorsInformation || [];
     this.dataSource.paginator = this.paginator;
+  }
+
+  public sendSms(id: number): void {
+    this.sendSmsClicked.emit(id);
+  }
+
+  public sendEmail(id: number): void {
+    this.sendEmailClicked.emit(id);
   }
 }

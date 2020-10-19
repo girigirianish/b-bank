@@ -10,3 +10,14 @@ table {
   justify-content: center;
   background: white;
 }
+
+.action-link {
+  a {
+    padding-bottom: 1px;
+    border-bottom: 1px solid #8d8df3;
+    color: #8d8df3;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+}

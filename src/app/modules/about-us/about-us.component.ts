@@ -14,7 +14,14 @@ export class AboutUsComponent implements OnInit {
     private readonly toast: ToastrService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchContactDetails();
+  }
+
+  private async fetchContactDetails(): Promise<void> {
+    const contactDetails = await this.contactService.getContactDetails();
+    console.log(contactDetails);
+  }
 
   public async contactDetailsSubmitted(
     contactDetails: ContactDetails
@@ -25,13 +32,13 @@ export class AboutUsComponent implements OnInit {
       );
 
       if (contactSend) {
-        this.toast.success('You query is successfully send');
+        this.toast.success('Your query is successfully send');
         return;
       }
 
-      this.toast.success('We are working on it. Please try again later');
+      this.toast.error('We are working on it. Please try again later');
     } catch (_) {
-      this.toast.success('We are working on it. Please try again later');
+      this.toast.error('We are working on it. Please try again later');
     }
   }
 }

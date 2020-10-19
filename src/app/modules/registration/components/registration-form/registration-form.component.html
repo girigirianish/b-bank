@@ -44,7 +44,7 @@
             formControlName="phoneNumber"
             matInput
             placeholder="Phone Number"
-            name="text"
+            name="number"
             required
           />
           <mat-error
@@ -70,41 +70,66 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>Permanent Address</mat-label>
-          <input
-            matInput
-            formControlName="permanentAddress"
-            placeholder="Permanent Address"
-            name="paddress"
-            required
-          />
-          <mat-error
-            *ngIf="
-              registrationForm.get('permanentAddress').hasError('required')
-            "
-          >
-            This field is required
-          </mat-error>
-        </mat-form-field>
+        <div class="address-box">
+          <mat-form-field>
+            <mat-label>Permanent Address</mat-label>
+            <input
+              matInput
+              formControlName="permanentAddress"
+              placeholder="Permanent Address"
+              name="paddress"
+              required
+            />
 
-        <mat-form-field class="full-width">
-          <mat-label>Temporary Address</mat-label>
-          <input
-            matInput
-            formControlName="temporaryAddress"
-            placeholder="Temporary Address"
-            name="taddress"
-            required
-          />
-          <mat-error
-            *ngIf="
-              registrationForm.get('temporaryAddress').hasError('required')
-            "
+            <mat-error
+              *ngIf="
+                registrationForm.get('permanentAddress').hasError('required')
+              "
+            >
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <button
+            type="button"
+            class="addressButton"
+            mat-raised-button
+            (click)="openMap('permanent')"
+            color="primary"
           >
-            This field is required
-          </mat-error>
-        </mat-form-field>
+            Choose a permanent address
+          </button>
+        </div>
+
+        <div class="address-box temporaray">
+          <mat-form-field>
+            <mat-label>Temporary Address</mat-label>
+            <input
+              matInput
+              formControlName="temporaryAddress"
+              placeholder="Temporary Address"
+              name="taddress"
+              required
+            />
+            <mat-error
+              *ngIf="
+                registrationForm.get('temporaryAddress').hasError('required')
+              "
+            >
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <button
+            type="button"
+            class="addressButton"
+            mat-raised-button
+            (click)="openMap('temporary')"
+            color="primary"
+          >
+            Choose a Temporary address
+          </button>
+        </div>
 
         <mat-form-field class="full-width">
           <mat-label>Last Donated at</mat-label>
@@ -126,11 +151,7 @@
         </mat-form-field>
 
         <mat-card-actions>
-          <button
-            mat-raised-button
-            (click)="register(formDirective)"
-            color="primary"
-          >
+          <button mat-raised-button (click)="register()" color="primary">
             Register
           </button>
         </mat-card-actions>

@@ -23,5 +23,6 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     ToastrModule,
   ],
+  providers: [],
 })
 export class HomeModule {}

@@ -37,12 +37,10 @@ export class SearchDonorFormComponent implements OnInit {
     });
   }
 
-  public searchDoner(formDirective: FormGroupDirective): void {
+  public searchDoner(): void {
     if (this.searchDonerForm.invalid) {
       return;
     }
     this.donerSearchSubmitted.next(this.searchDonerForm.value);
-    setTimeout(() => formDirective.resetForm(), 200);
-    this.searchDonerForm.reset();
   }
 }

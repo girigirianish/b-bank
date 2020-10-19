@@ -7,4 +7,6 @@ export interface RegistrationDetails {
   district: string;
   bloodGroup: string;
   lastDonated: Date;
+  lat: number;
+  lng: number;
 }

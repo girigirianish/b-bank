@@ -18,7 +18,7 @@ export class ContactService {
   ): Promise<any> {
     return this.http
       .post(
-        `${this.restUrl}/contact-details`,
+        `${this.restUrl}/feedback/store`,
         this.prepareContactRequestPayload(contactDetails)
       )
       .toPromise();
@@ -28,11 +28,17 @@ export class ContactService {
     contactDetails: ContactDetails
   ): FormData {
     const formData: FormData = new FormData();
-    formData.append('firstName', contactDetails.firstName);
-    formData.append('lastName', contactDetails.lastName);
+    formData.append('first_name', contactDetails.firstName);
+    formData.append('last_name', contactDetails.lastName);
     formData.append('email', contactDetails.email);
     formData.append('subject', contactDetails.subject);
     formData.append('message', contactDetails.message);
     return formData;
+  }
+
+  public async getContactDetails(): Promise<any> {
+    return this.http
+      .post(`${this.restUrl}/contact-details`, new FormData())
+      .toPromise();
   }
 }

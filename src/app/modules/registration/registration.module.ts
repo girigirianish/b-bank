@@ -17,6 +17,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { ToastrModule } from 'ngx-toastr';
+import { MapModule } from '../map';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [RegistrationComponent, RegistrationFormComponent],
@@ -33,6 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MapModule,
+    MatDialogModule,
   ],
 })
 export class RegistrationModule {}

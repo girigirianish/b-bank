@@ -8,9 +8,6 @@ import {
   BLOOD_GROUP_TYPE_SELECT_BOX_ITEMS,
 } from '../search-models';
 import { BloodGroupService } from '../shared/services';
-import { GeoCodeService } from '../map/services';
-import { from, Observable, of } from 'rxjs';
-import { map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -19,7 +16,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  private donorsInformation: DonorsInformation[];
   public donorsFilteredList: DonorsInformation[];
   public markerDetails: MarkerDetails[] = [];
   public readonly districtSearchBox: SearchSelectBoxModel[] = DISTRICT_SELECT_BOX_ITEMS;
@@ -30,87 +26,20 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly donerService: DonorService,
     private readonly bloodGroupService: BloodGroupService,
-    private readonly geocodeService: GeoCodeService,
     private readonly toast: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.setDonerInformation();
     this.prepareBloodGroupSelectBox();
   }
 
-  private async setDonerInformation(): Promise<void> {
-    this.donorsInformation = (
-      await this.donerService.getDonersInformations()
-    ).data;
-    console.log(this.donorsInformation, 'donerInformation');
-    this.donorsFilteredList = this.donorsInformation;
-    this.prepareMarkerDetails().subscribe(
-      (markersDetails) => (this.markerDetails = markersDetails)
-    );
-  }
-
-  private prepareMarkerDetails(): Observable<any> {
-    let donerInfo;
-    return from(this.donorsFilteredList).pipe(
-      mergeMap((donerInformation) => {
-        donerInfo = donerInformation;
-        return this.geocodeService.geocode(donerInformation.temporary_address);
-      }, 2),
-      switchMap((geocode) => {
-        if (!geocode) {
-          return this.geocodeService.geocode(donerInfo.permanent_address).pipe(
-            map((getdata) => {
-              if (geocode) {
-                return of({
-                  lat: geocode.lat,
-                  long: geocode.long,
-                });
-              }
-              return of(null);
-            })
-          );
-        }
-        if (geocode) {
-          return of({
-            lat: geocode.lat,
-            long: geocode.lon,
-          });
-        }
-        return of(null);
-      }),
-      reduce((a, i) => [...a, i], [])
-    );
-  }
-
-  public filterDonersData(): void {
-    if (!this.selectedDistrict && !this.selectedBloodGroupType) {
-      return;
-    }
-
-    this.donorsFilteredList = this.donorsInformation.filter((donerInfo) => {
-      if (this.selectedDistrict && this.selectedBloodGroupType) {
-        return (
-          donerInfo.blood_group === this.selectedBloodGroupType &&
-          donerInfo.district === this.selectedDistrict
-        );
-      }
-      if (this.selectedDistrict) {
-        return donerInfo.district === this.selectedDistrict;
-      }
-
-      if (this.selectedBloodGroupType) {
-        return donerInfo.blood_group === this.selectedBloodGroupType;
-      }
+  private prepareMarkerDetails(): void {
+    this.markerDetails = this.donorsFilteredList.map((donor) => {
+      return {
+        lat: donor.lat,
+        long: donor.lng,
+      };
     });
-    this.prepareMarkerDetails();
-  }
-
-  public resetToInitailView(): void {
-    this.donorsFilteredList = this.donorsInformation;
-    this.prepareMarkerDetails();
-    this.selectedDistrict = null;
-    this.selectedBloodGroupType = null;
   }
 
   private async prepareBloodGroupSelectBox(): Promise<void> {
@@ -125,7 +54,37 @@ export class HomeComponent implements OnInit {
   ): Promise<void> {
     try {
       const searchResponse = await this.donerService.searchDoner(searchQuery);
-      console.log(searchResponse, 'resposne');
+      this.donorsFilteredList = searchResponse;
+      if (!this.donorsFilteredList.length) {
+        this.toast.info('Sorry,no results found for you query.');
+        return;
+      }
+      this.donorsFilteredList[0].lat = 27.700001;
+      this.donorsFilteredList[0].lng = 85.333336;
+      this.prepareMarkerDetails();
+    } catch (_) {
+      this.toast.error(
+        'Something went wrong! Please try again after some time'
+      );
+    }
+  }
+
+  public async sendSmsClicked(id: number): Promise<void> {
+    try {
+      const smsSent = await this.donerService.sendSmsToDoner(id);
+      console.log(smsSent, 'smsSent');
+      this.toast.success('A sms was send successfully.');
+    } catch (_) {
+      this.toast.error(
+        'Something went wrong! Please try again after some time'
+      );
+    }
+  }
+
+  public async sendEmailClicked(id: number): Promise<void> {
+    try {
+      const emailSent = await this.donerService.sendEmailToDoner(id);
+      this.toast.success('An email was send successfully.');
     } catch (_) {
       this.toast.error(
         'Something went wrong! Please try again after some time'

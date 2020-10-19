@@ -2,10 +2,12 @@
   [bloodGroupSeachBox]="bloodGroupSeachBox"
   (donerSearchSubmitted)="donerSearchSubmitted($event)"
 ></search-donor-form>
+<blood-bank-doners-list
+  [donorsInformation]="donorsFilteredList"
+  (sendSmsClicked)="sendSmsClicked($event)"
+  (sendEmailClicked)="sendEmailClicked($event)"
+></blood-bank-doners-list>
 <blood-bank-map
   class="home-map-section"
   [markerDetails]="markerDetails"
 ></blood-bank-map>
-<blood-bank-doners-list
-  [donorsInformation]="donorsFilteredList"
-></blood-bank-doners-list>

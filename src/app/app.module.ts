@@ -14,8 +14,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BLOOD_BANK_REST_URL } from './app-rest.injection-token';
 
-import { ApiSecretInterceptor } from './modules/core/interceptors';
+import {
+  ApiSecretInterceptor,
+  SearchAuthHeaderInterceptor,
+} from './modules/core/interceptors';
 import { environment } from 'src/environments/environment';
+import { MapModule } from './modules/map';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +34,7 @@ import { environment } from 'src/environments/environment';
       positionClass: 'toast-bottom-left',
       preventDuplicates: true,
     }),
+    MapModule,
   ],
   providers: [
     {
@@ -42,6 +47,11 @@ import { environment } from 'src/environments/environment';
       },
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiSecretInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SearchAuthHeaderInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -18,7 +18,7 @@ export class RegistrationService {
   ): Promise<any> {
     return this.http
       .post(
-        `${this.restUrl}/register/donners`,
+        `${this.restUrl}/register/donor`,
         this.prepareRegisterRequestPayload(registrationDetails)
       )
       .toPromise();
@@ -34,18 +34,21 @@ export class RegistrationService {
     formData.append('blood_group', registrationDetails.bloodGroup);
     formData.append('permanent_address', registrationDetails.permanentAddress);
     formData.append('temporary_address', registrationDetails.temporaryAddress);
+    formData.append('lat', registrationDetails.lat.toString());
+    formData.append('lng', registrationDetails.lng.toString());
 
-    const dd = String(registrationDetails.lastDonated.getDate()).padStart(
-      2,
-      '0'
-    );
-    const mm = String(registrationDetails.lastDonated.getMonth() + 1).padStart(
-      2,
-      '0'
-    );
-    const yyyy = registrationDetails.lastDonated.getFullYear();
+    if (registrationDetails.lastDonated) {
+      const dd = String(registrationDetails.lastDonated.getDate()).padStart(
+        2,
+        '0'
+      );
+      const mm = String(
+        registrationDetails.lastDonated.getMonth() + 1
+      ).padStart(2, '0');
+      const yyyy = registrationDetails.lastDonated.getFullYear();
 
-    formData.append('last_donated_at', `${yyyy}/${mm}/${dd}`);
+      formData.append('last_donated_at', `${yyyy}/${mm}/${dd}`);
+    }
 
     return formData;
   }

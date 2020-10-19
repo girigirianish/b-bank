@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RegistrationDetails } from './models';
 import { RegistrationService } from '../registration/services';
 import { ToastrService } from 'ngx-toastr';
+import { RegistrationFormComponent } from './components';
 
 @Component({
   selector: 'blood-bank-registration',
@@ -9,6 +10,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
+  @ViewChild(RegistrationFormComponent, {
+    static: false,
+    read: RegistrationFormComponent,
+  })
+  public registerForm: RegistrationFormComponent;
   constructor(
     private readonly registrationService: RegistrationService,
     private readonly toast: ToastrService
@@ -25,9 +31,10 @@ export class RegistrationComponent implements OnInit {
       );
       if (registeredStatus) {
         this.toast.success('You are successfully registered');
+        this.registerForm.resetForm();
       }
     } catch (_) {
-      this.toast.success('We are working on it. Please try again later');
+      this.toast.error('We are working on it. Please try again later');
     }
   }
 }

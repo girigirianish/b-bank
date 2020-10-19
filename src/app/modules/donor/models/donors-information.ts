@@ -11,4 +11,6 @@ export interface DonorsInformation {
   created_at: string;
   updated_at: string;
   district?: string;
+  lat: number;
+  lng: number;
 }
