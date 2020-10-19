@@ -48,12 +48,8 @@ export class RegistrationFormComponent implements OnInit {
     this.registrationForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      temporaryAddress: new FormControl({ value: '', disabled: true }, [
-        Validators.required,
-      ]),
-      permanentAddress: new FormControl({ value: '', disabled: true }, [
-        Validators.required,
-      ]),
+      temporaryAddress: new FormControl('', [Validators.required]),
+      permanentAddress: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required]),
       bloodGroup: new FormControl('', [Validators.required]),
       lastDonated: new FormControl('', []),
