@@ -59,8 +59,6 @@ export class HomeComponent implements OnInit {
         this.toast.info('Sorry,no results found for you query.');
         return;
       }
-      this.donorsFilteredList[0].lat = 27.700001;
-      this.donorsFilteredList[0].lng = 85.333336;
       this.prepareMarkerDetails();
     } catch (_) {
       this.toast.error(
@@ -71,8 +69,7 @@ export class HomeComponent implements OnInit {
 
   public async sendSmsClicked(id: number): Promise<void> {
     try {
-      const smsSent = await this.donerService.sendSmsToDoner(id);
-      console.log(smsSent, 'smsSent');
+      await this.donerService.sendSmsToDoner(id);
       this.toast.success('A sms was send successfully.');
     } catch (_) {
       this.toast.error(
@@ -83,7 +80,7 @@ export class HomeComponent implements OnInit {
 
   public async sendEmailClicked(id: number): Promise<void> {
     try {
-      const emailSent = await this.donerService.sendEmailToDoner(id);
+      await this.donerService.sendEmailToDoner(id);
       this.toast.success('An email was send successfully.');
     } catch (_) {
       this.toast.error(
