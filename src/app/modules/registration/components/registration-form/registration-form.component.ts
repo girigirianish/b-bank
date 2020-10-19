@@ -1,5 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 import {
   BLOOD_GROUP_TYPE_SELECT_BOX_ITEMS,
   DISTRICT_SELECT_BOX_ITEMS,
@@ -16,6 +21,7 @@ export class RegistrationFormComponent implements OnInit {
   public readonly districtSearchBox: SearchSelectBoxModel[] = DISTRICT_SELECT_BOX_ITEMS;
   public readonly bloodGroupSeachBox: SearchSelectBoxModel[] = BLOOD_GROUP_TYPE_SELECT_BOX_ITEMS;
   public registrationForm: FormGroup;
+  public yesterday = new Date();
 
   @Output()
   public readonly registrationDetailsSubmitted = new EventEmitter<
@@ -24,24 +30,27 @@ export class RegistrationFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.prepareRegistrationForm();
+    this.yesterday.setDate(this.yesterday.getDate() - 1);
   }
 
   private prepareRegistrationForm(): void {
     this.registrationForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl('', [Validators.required]),
+      temporaryAddress: new FormControl('', [Validators.required]),
+      permanentAddress: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required]),
-      district: new FormControl('', [Validators.required]),
       bloodGroup: new FormControl('', [Validators.required]),
+      lastDonated: new FormControl('', []),
     });
   }
 
-  public register(): void {
+  public register(formDirective: FormGroupDirective): void {
     if (this.registrationForm.invalid) {
       return;
     }
     this.registrationDetailsSubmitted.next(this.registrationForm.value);
+    setTimeout(() => formDirective.resetForm(), 200);
+    this.registrationForm.reset();
   }
 }

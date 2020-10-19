@@ -1,0 +1,77 @@
+<div class="search-container">
+  <form
+    class="search-form"
+    [formGroup]="searchDonerForm"
+    #formDirective="ngForm"
+  >
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Blood Group</mat-label>
+      <mat-select formControlName="bloodGroup" required>
+        <mat-option
+          *ngFor="let bloodGroup of bloodGroupSeachBox"
+          [value]="bloodGroup.value"
+        >
+          {{ bloodGroup.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="searchDonerForm.get('bloodGroup').hasError('required')">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input
+        formControlName="bloodSeekerName"
+        matInput
+        placeholder="Blood Seeker Name"
+        required
+      />
+      <mat-error
+        *ngIf="searchDonerForm.get('bloodSeekerName').hasError('required')"
+      >
+        This field is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Address</mat-label>
+      <input
+        formControlName="donorAddress"
+        matInput
+        placeholder="Doner address"
+        required
+      />
+      <mat-error
+        *ngIf="searchDonerForm.get('donorAddress').hasError('required')"
+      >
+        This field is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Contact Number</mat-label>
+      <input
+        formControlName="contactNumber"
+        matInput
+        placeholder="Contact Number"
+        required
+      />
+      <mat-error
+        *ngIf="searchDonerForm.get('contactNumber').hasError('required')"
+      >
+        This field is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-card-actions class="search-field">
+      <button
+        mat-raised-button
+        (click)="searchDoner(formDirective)"
+        color="primary"
+      >
+        Search
+      </button>
+    </mat-card-actions>
+  </form>
+</div>

@@ -1,44 +1,7 @@
-<div class="home-search-container">
-  <mat-form-field appearance="fill">
-    <mat-label>District</mat-label>
-    <mat-select
-      [(value)]="selectedDistrict"
-      (selectionChange)="filterDonersData()"
-    >
-      <mat-option
-        *ngFor="let district of districtSearchBox"
-        [value]="district.value"
-      >
-        {{ district.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field class="home-search-field" appearance="fill">
-    <mat-label>Blood Group</mat-label>
-    <mat-select
-      [(value)]="selectedBloodGroupType"
-      (selectionChange)="filterDonersData()"
-    >
-      <mat-option
-        *ngFor="let bloodGroup of bloodGroupSeachBox"
-        [value]="bloodGroup.value"
-      >
-        {{ bloodGroup.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button
-    class="home-search-field reset-icon"
-    mat-mini-fab
-    color="primary"
-    aria-label="Reset"
-    (click)="resetToInitailView()"
-  >
-    <mat-icon>redo</mat-icon>
-  </button>
-</div>
-
+<search-donor-form
+  [bloodGroupSeachBox]="bloodGroupSeachBox"
+  (donerSearchSubmitted)="donerSearchSubmitted($event)"
+></search-donor-form>
 <blood-bank-map
   class="home-map-section"
   [markerDetails]="markerDetails"

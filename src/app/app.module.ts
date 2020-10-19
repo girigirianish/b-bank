@@ -10,6 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { BLOOD_BANK_REST_URL } from './app-rest.injection-token';
+
+import { ApiSecretInterceptor } from './modules/core/interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatTabsModule,
     MatToolbarModule,
     ToastrModule.forRoot({
@@ -24,7 +30,13 @@ import { ToastrModule } from 'ngx-toastr';
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: BLOOD_BANK_REST_URL,
+      useValue: 'http://dev-bloodb.sevadev.com/admin/api',
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiSecretInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

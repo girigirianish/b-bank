@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "",
+    "target": "http://bloodb.sevadev.com",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",

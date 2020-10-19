@@ -1,9 +1,10 @@
 export interface RegistrationDetails {
-  firstName: string;
-  lastName: string;
+  name: string;
+  temporaryAddress: string;
+  permanentAddress: string;
   email: string;
-  address: string;
   phoneNumber: string;
   district: string;
   bloodGroup: string;
+  lastDonated: Date;
 }

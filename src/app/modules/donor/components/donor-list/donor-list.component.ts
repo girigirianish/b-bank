@@ -16,8 +16,11 @@ export class DonorListComponent implements AfterViewInit {
   public readonly displayedColumns: string[] = [
     'id',
     'name',
-    'district',
-    'bloodGroup',
+    'email',
+    'blood_group',
+    'permanent_address',
+    'temporary_address',
+    'contact_no',
   ];
 
   public dataSource: MatTableDataSource<
