@@ -1,6 +1,6 @@
 
 variables:
-  DIST_DIR: dist/blood-bank-ng
+  DIST_DIR: dist/blood-bank-ng/*
 
 stages:
   - build
