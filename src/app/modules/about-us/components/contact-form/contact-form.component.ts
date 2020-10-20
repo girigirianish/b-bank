@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactDetails } from '../../models';
 
@@ -8,11 +8,12 @@ import { ContactDetails } from '../../models';
   styleUrls: ['contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit {
-  public contactForm: FormGroup;
+  @Input()
+  public aboutUsContent: string;
 
   @Output()
   public readonly contactDetailsSubmitted = new EventEmitter<ContactDetails>();
-
+  public contactForm: FormGroup;
   public ngOnInit(): void {
     this.prepareRegistrationForm();
   }

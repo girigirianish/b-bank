@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContactDetails } from './models';
 import { ContactService } from './services/contact.service';
 import { ToastrService } from 'ngx-toastr';
+import { PagesService } from '../shared/services';
 
 @Component({
   selector: 'blood-bank-about-us',
@@ -9,8 +10,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent implements OnInit {
+  public aboutUsContent: string;
   constructor(
     private readonly contactService: ContactService,
+    private readonly pagesServce: PagesService,
     private readonly toast: ToastrService
   ) {}
 
@@ -19,8 +22,7 @@ export class AboutUsComponent implements OnInit {
   }
 
   private async fetchContactDetails(): Promise<void> {
-    const contactDetails = await this.contactService.getContactDetails();
-    console.log(contactDetails);
+    this.aboutUsContent = await this.pagesServce.getPageContent('about-us');
   }
 
   public async contactDetailsSubmitted(

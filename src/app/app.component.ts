@@ -21,6 +21,14 @@ export class AppComponent implements OnInit {
       label: 'About Us',
       link: 'about-us',
     },
+    {
+      label: 'Privacy Policy',
+      link: 'privacy-policy',
+    },
+    {
+      label: 'Terms And Conditions',
+      link: 'terms-and-conditions',
+    },
   ];
   public readonly activeLink = this.tabs[0].link;
 

@@ -12,6 +12,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/about-us/about-us.module').then((m) => m.AboutUsModule),
   },
+
+  {
+    path: 'privacy-policy',
+    loadChildren: () =>
+      import('./modules/privacy-policy/privacy-policy.module').then(
+        (m) => m.PrivacyPolicyModule
+      ),
+  },
+  {
+    path: 'terms-and-conditions',
+    loadChildren: () =>
+      import('./modules/terms-and-conditions/terms-and-conditions.module').then(
+        (m) => m.TermsAndConditionsModule
+      ),
+  },
   {
     path: 'registration',
     loadChildren: () =>
