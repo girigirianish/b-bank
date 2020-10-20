@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
       link: 'registration',
     },
     {
+      label: 'Events',
+      link: 'events',
+    },
+    {
       label: 'About Us',
       link: 'about-us',
     },

@@ -28,6 +28,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'events',
+    loadChildren: () =>
+      import('./modules/events/events.module').then((m) => m.EventsModule),
+  },
+  {
     path: 'registration',
     loadChildren: () =>
       import('./modules/registration/registration.module').then(

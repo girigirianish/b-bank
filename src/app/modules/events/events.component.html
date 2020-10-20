@@ -1,0 +1,54 @@
+<div
+  class="content"
+  fxLayout="row wrap"
+  fxLayoutGap="16px grid"
+  [style.margin-top]="'12px'"
+>
+  <div
+    class="event-card"
+    fxFlex="25%"
+    fxFlex.xs="100%"
+    fxFlex.sm="33%"
+    *ngFor="let item of eventList"
+    (click)="openDescriptionModal(item)"
+  >
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title class="text-oneline">{{ item.title }}</mat-card-title>
+        <mat-card-subtitle>Held on: {{ item.event_date }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.photo" />
+      <mat-card-content>
+        <p>
+          {{ item.meta_description }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #descriptionModal>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" [style.margin-top]="'12px'">
+    <div class="event-card" fxFlex.xs="100%">
+      <mat-card class="mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>{{ selectedCard.title }}</mat-card-title>
+          <mat-card-subtitle
+            >Held on: {{ selectedCard.event_date }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <img mat-card-image [src]="selectedCard.photo" />
+        <mat-card-content>
+          <p>
+            {{ selectedCard.meta_description }}
+          </p>
+        </mat-card-content>
+        <mat-card-content>
+          <p>
+            {{ selectedCard.content }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

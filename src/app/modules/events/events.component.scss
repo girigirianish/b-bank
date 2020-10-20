@@ -1,0 +1,39 @@
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.content {
+  padding: 16px;
+  mat-card-header {
+    display: flow-root;
+  }
+}
+
+.content > mat-card {
+  margin-bottom: 16px;
+}
+
+.event-card {
+  cursor: pointer;
+}
+
+.text-oneline {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+mat-card img {
+  height: fit-content; //so that it takes up full space
+  max-height: 250px !important; // this prevents the image from being extremely big
+  object-fit: cover;
+  object-position: center; /* this centers and crops the image so that it doesn't break the aspect ratio */
+}
+
+p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

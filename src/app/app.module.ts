@@ -6,6 +6,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { FlexModule } from '@angular/flex-layout';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -35,6 +37,7 @@ import { MapModule } from './modules/map';
       preventDuplicates: true,
     }),
     MapModule,
+    FlexModule,
   ],
   providers: [
     {
