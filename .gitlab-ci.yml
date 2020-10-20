@@ -1,9 +1,11 @@
 
 variables:
   DIST_DIR: dist/blood-bank-ng/*
+  DOC_DIR: /documentation/*
 
 stages:
   - build
+  - generate-doc
   - deploy-dev
   - build-prod
   - deploy-prod
@@ -34,6 +36,18 @@ build-prod:
     paths:
       - dist/blood-bank-ng
 
+generate-doc:
+  stage: generate-prod-doc
+  only:
+    - master
+    - develop
+  image: node:latest
+  script:
+    - npm run compodoc
+  artifacts:
+    paths:
+      - /documentation
+
 deploy-prod:
   stage: deploy-prod
   only:
@@ -47,6 +61,7 @@ deploy-prod:
     - chmod 700 ~/.ssh
   script:
     - scp -P 22020 -r -o StrictHostKeyChecking=no $DIST_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client/html
+    - scp -P 22020 -r -o StrictHostKeyChecking=no $DIST_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client-doc/html
 
 deploy-dev:
   stage: deploy-dev
@@ -61,3 +76,4 @@ deploy-dev:
     - chmod 700 ~/.ssh
   script:
     - scp -P 22020 -r -o StrictHostKeyChecking=no $DIST_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client-dev/html
+    - scp -P 22020 -r -o StrictHostKeyChecking=no $DIST_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client-dev-doc/html
