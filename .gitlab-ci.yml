@@ -1,7 +1,7 @@
 
 variables:
   DIST_DIR: dist/blood-bank-ng/*
-  DOC_DIR: /documentation/*
+  DOC_DIR: documentation/*
 
 stages:
   - build
@@ -46,7 +46,7 @@ generate-doc:
     - npm run compodoc
   artifacts:
     paths:
-      - /documentation
+      - documentation
 
 deploy-prod:
   stage: deploy-prod
