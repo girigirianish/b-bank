@@ -37,7 +37,7 @@ build-prod:
       - dist/blood-bank-ng
 
 generate-doc:
-  stage: generate-prod-doc
+  stage: generate-doc
   only:
     - master
     - develop
