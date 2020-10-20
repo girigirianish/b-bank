@@ -4,13 +4,13 @@ variables:
 
 stages:
   - build
+  - deploy-dev
   - build-prod
   - deploy-prod
-  - deploy-dev
 
 build:
   stage: build
-    except:
+  except:
     - master
   image: node:latest
   script:
