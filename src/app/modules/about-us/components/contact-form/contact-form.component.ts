@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { ContactDetails } from '../../models';
 
 @Component({
@@ -8,6 +8,8 @@ import { ContactDetails } from '../../models';
   styleUrls: ['contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit {
+  @ViewChild('formDirective') form: NgForm;
+
   @Input()
   public aboutUsContent: string;
 
@@ -33,4 +35,9 @@ export class ContactFormComponent implements OnInit {
     }
     this.contactDetailsSubmitted.next(this.contactForm.value);
   }
+
+  public resetForm(): void {
+    setTimeout(() => this.form.resetForm(), 200);
+    this.contactForm.reset();
+}
 }

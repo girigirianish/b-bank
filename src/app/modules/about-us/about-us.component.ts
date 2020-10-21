@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContactDetails } from './models';
 import { ContactService } from './services/contact.service';
 import { ToastrService } from 'ngx-toastr';
 import { PagesService } from '../shared/services';
+import { ContactFormComponent } from './components';
 
 @Component({
   selector: 'blood-bank-about-us',
@@ -10,6 +11,11 @@ import { PagesService } from '../shared/services';
   styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent implements OnInit {
+  @ViewChild(ContactFormComponent, {
+    static: false,
+    read: ContactFormComponent,
+})
+public contactForm: ContactFormComponent;
   public aboutUsContent: string;
   constructor(
     private readonly contactService: ContactService,
@@ -35,6 +41,7 @@ export class AboutUsComponent implements OnInit {
 
       if (contactSend) {
         this.toast.success('Your query is successfully send');
+        this.contactForm.resetForm();
         return;
       }
 

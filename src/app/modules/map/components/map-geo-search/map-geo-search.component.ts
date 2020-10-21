@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import * as L from 'leaflet';
 import * as esriGeo from 'esri-leaflet-geocoder';
@@ -9,6 +15,7 @@ import { MarkerDetails } from '../map/map.component';
   selector: 'map-geo-search',
   templateUrl: 'map-geo-search.component.html',
   styleUrls: ['map-geo-search.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MapGeoSearchComponent implements AfterViewInit {
   @Output()
