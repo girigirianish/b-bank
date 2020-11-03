@@ -93,4 +93,20 @@ export class HomeComponent implements OnInit {
       );
     }
   }
+
+  public async sendBulkSmsClicked(ids: number[]): Promise<void> {
+    const smsPromises = ids.map((id) => {
+      return this.donerService.sendSmsToDoner(id);
+    });
+
+    await Promise.all(smsPromises);
+  }
+
+  public async sendBulkEmailClicked(ids: number[]): Promise<void> {
+    const smsPromises = ids.map((id) => {
+      return this.donerService.sendEmailToDoner(id);
+    });
+
+    await Promise.all(smsPromises);
+  }
 }

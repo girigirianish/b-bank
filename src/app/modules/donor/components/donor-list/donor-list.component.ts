@@ -27,6 +27,16 @@ export class DonorListComponent implements AfterViewInit {
   @Output()
   public sendEmailClicked: EventEmitter<number> = new EventEmitter<number>();
 
+  @Output()
+  public sendBulkSmsClicked: EventEmitter<number[]> = new EventEmitter<
+    number[]
+  >();
+
+  @Output()
+  public sendBulkEmailClicked: EventEmitter<number[]> = new EventEmitter<
+    number[]
+  >();
+
   public readonly displayedColumns: string[] = [
     'id',
     'name',
@@ -46,6 +56,10 @@ export class DonorListComponent implements AfterViewInit {
     .connect()
     .pipe(map((data) => data.length === 0));
 
+  public showBulkButton: any = this.dataSource
+    .connect()
+    .pipe(map((data) => data.length > 1));
+
   @ViewChild(MatPaginator) public paginator: MatPaginator;
 
   ngAfterViewInit(): void {
@@ -59,5 +73,13 @@ export class DonorListComponent implements AfterViewInit {
 
   public sendEmail(id: number): void {
     this.sendEmailClicked.emit(id);
+  }
+
+  public sendBulkSms(): void {
+    this.sendBulkSmsClicked.emit(this.dataSource.data.map((d) => d.id));
+  }
+
+  public sendBulkEmail(): void {
+    this.sendBulkEmailClicked.emit(this.dataSource.data.map((d) => d.id));
   }
 }

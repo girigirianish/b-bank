@@ -1,4 +1,22 @@
 <div class="mat-elevation-z8">
+  <button
+    *ngIf="showBulkButton | async"
+    class="bulk-button"
+    mat-raised-button
+    color="primary"
+    (click)="sendBulkSms()"
+  >
+    Send Sms to all
+  </button>
+  <button
+    *ngIf="showBulkButton | async"
+    class="bulk-button"
+    mat-raised-button
+    color="primary"
+    (click)="sendBulkSms()"
+  >
+    Send Email to all
+  </button>
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
