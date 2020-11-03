@@ -20,10 +20,7 @@
       </mat-card-header>
       <img mat-card-image [src]="item.photo" />
       <mat-card-content>
-        <div
-          class="short-description"
-          [innerHTML]="item.meta_description"
-        ></div>
+        <div class="short-description" [innerHTML]="selectedCard.content"></div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -43,9 +40,6 @@
           >
         </mat-card-header>
         <img mat-card-image [src]="selectedCard.photo" />
-        <mat-card-content>
-          <div [innerHTML]="selectedCard.meta_description"></div>
-        </mat-card-content>
         <mat-card-content>
           <div [innerHTML]="selectedCard.content"></div>
         </mat-card-content>
