@@ -30,7 +30,7 @@ mat-card img {
   object-position: center; /* this centers and crops the image so that it doesn't break the aspect ratio */
 }
 
-p {
+.short-description {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;

@@ -25,6 +25,12 @@ export class EventsComponent implements OnInit {
 
   private async fetchDonersEvent(): Promise<void> {
     this.eventList = (await this.eventService.getEvents()).data;
+    this.eventList = this.eventList.map((event) => {
+      if (event.photo.indexOf('uploads') > -1) {
+        event.photo = `admin/${event.photo}`;
+      }
+      return event;
+    });
     console.log(this.eventList);
   }
 
