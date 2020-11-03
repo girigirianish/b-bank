@@ -33,7 +33,10 @@ export class SearchDonorFormComponent implements OnInit {
       bloodGroup: new FormControl('', [Validators.required]),
       bloodSeekerName: new FormControl('', [Validators.required]),
       donorAddress: new FormControl('', [Validators.required]),
-      contactNumber: new FormControl('', [Validators.required]),
+      contactNumber: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+      ]),
     });
   }
 

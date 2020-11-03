@@ -50,7 +50,10 @@ export class RegistrationFormComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       temporaryAddress: new FormControl('', [Validators.required]),
       permanentAddress: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+      ]),
       bloodGroup: new FormControl('', [Validators.required]),
       lastDonated: new FormControl('', []),
     });

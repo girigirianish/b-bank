@@ -62,6 +62,12 @@
       >
         This field is required
       </mat-error>
+
+      <mat-error
+        *ngIf="searchDonerForm.get('contactNumber').hasError('minlength')"
+      >
+        Contact Number must be at least 10 characters long.
+      </mat-error>
     </mat-form-field>
 
     <mat-card-actions class="search-field">
