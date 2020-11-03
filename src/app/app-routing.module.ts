@@ -3,7 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'registration',
+    loadChildren: () =>
+      import('./modules/registration/registration.module').then(
+        (m) => m.RegistrationModule
+      ),
+  },
+  {
+    path: 'search-doner',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
   },
@@ -33,15 +40,8 @@ const routes: Routes = [
       import('./modules/events/events.module').then((m) => m.EventsModule),
   },
   {
-    path: 'registration',
-    loadChildren: () =>
-      import('./modules/registration/registration.module').then(
-        (m) => m.RegistrationModule
-      ),
-  },
-  {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'registration',
   },
 ];
 

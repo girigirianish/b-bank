@@ -11,11 +11,11 @@ export class AppComponent implements OnInit {
   public readonly tabs = [
     {
       label: 'Home',
-      link: 'home',
+      link: 'registration',
     },
     {
-      label: 'Registration',
-      link: 'registration',
+      label: 'Search Doner',
+      link: 'search-doner',
     },
     {
       label: 'Events',
@@ -39,6 +39,6 @@ export class AppComponent implements OnInit {
   constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.router.navigate(['home']);
+    this.router.navigate(['registration']);
   }
 }
