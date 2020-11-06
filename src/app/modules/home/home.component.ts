@@ -95,18 +95,32 @@ export class HomeComponent implements OnInit {
   }
 
   public async sendBulkSmsClicked(ids: number[]): Promise<void> {
-    const smsPromises = ids.map((id) => {
-      return this.donerService.sendSmsToDoner(id);
-    });
+    try {
+      const smsPromises = ids.map((id) => {
+        return this.donerService.sendSmsToDoner(id);
+      });
 
-    await Promise.all(smsPromises);
+      await Promise.all(smsPromises);
+      this.toast.success('Sms were sent successfully.');
+    } catch (_) {
+      this.toast.error(
+        'Something went wrong! Please try again after some time'
+      );
+    }
   }
 
   public async sendBulkEmailClicked(ids: number[]): Promise<void> {
-    const smsPromises = ids.map((id) => {
-      return this.donerService.sendEmailToDoner(id);
-    });
+    try {
+      const smsPromises = ids.map((id) => {
+        return this.donerService.sendEmailToDoner(id);
+      });
 
-    await Promise.all(smsPromises);
+      await Promise.all(smsPromises);
+      this.toast.success('Emails were sent successfully.');
+    } catch (_) {
+      this.toast.error(
+        'Something went wrong! Please try again after some time'
+      );
+    }
   }
 }
