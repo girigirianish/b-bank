@@ -83,7 +83,7 @@ check-e2e:
   stage: check-e2e
   image: node:latest
   script:
-    - git clone "http.proxy=http://${CYPRESS_DEPLOY_USERNAME}:${CYPRESS_DEPLOY_KEY}@gitlab.com:blood-donation1/blood-bank-cypress.git"
+    - "http.proxy=http://${CYPRESS_DEPLOY_USERNAME}:${CYPRESS_DEPLOY_KEY}@gitlab.com:blood-donation1/blood-bank-cypress.git"
     - git checkout ci-setup
     - npm ci
     - npm run e2e:run
