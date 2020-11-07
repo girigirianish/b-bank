@@ -65,7 +65,14 @@ export class HomeComponent implements OnInit {
         return;
       }
       this.prepareMarkerDetails();
-    } catch (_) {
+    } catch (e) {
+      if (e.error) {
+        const errors = Object.values(e.error);
+        if (errors.length && Array.isArray(errors[0])) {
+          this.toast.error(errors[0][0]);
+          return;
+        }
+      }
       this.toast.error(
         'Something went wrong! Please try again after some time'
       );
