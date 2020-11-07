@@ -36,6 +36,7 @@ export class SearchDonorFormComponent implements OnInit {
       contactNumber: new FormControl('', [
         Validators.required,
         Validators.minLength(10),
+        Validators.maxLength(10),
       ]),
     });
   }

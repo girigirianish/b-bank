@@ -53,6 +53,7 @@ export class RegistrationFormComponent implements OnInit {
       phoneNumber: new FormControl('', [
         Validators.required,
         Validators.minLength(10),
+        Validators.maxLength(10),
       ]),
       bloodGroup: new FormControl('', [Validators.required]),
       lastDonated: new FormControl('', []),

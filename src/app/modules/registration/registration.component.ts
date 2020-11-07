@@ -3,6 +3,7 @@ import { RegistrationDetails } from './models';
 import { RegistrationService } from '../registration/services';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationFormComponent } from './components';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'blood-bank-registration',
@@ -33,7 +34,15 @@ export class RegistrationComponent implements OnInit {
         this.toast.success('You are successfully registered');
         this.registerForm.resetForm();
       }
-    } catch (_) {
+    } catch (e) {
+      if (e.error) {
+        const errors = Object.values(e.error);
+        if (errors.length && Array.isArray(errors[0])) {
+          this.toast.error(errors[0][0]);
+          return;
+        }
+      }
+
       this.toast.error('We are working on it. Please try again later');
     }
   }
