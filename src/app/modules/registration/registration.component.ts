@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
   @ViewChild(RegistrationFormComponent, {
     static: false,
     read: RegistrationFormComponent,
@@ -20,8 +20,6 @@ export class RegistrationComponent implements OnInit {
     private readonly registrationService: RegistrationService,
     private readonly toast: ToastrService
   ) {}
-
-  ngOnInit(): void {}
 
   public async registrationDetailsSubmitted(
     registrationDetails: RegistrationDetails

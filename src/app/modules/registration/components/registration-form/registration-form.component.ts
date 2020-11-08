@@ -30,7 +30,7 @@ export class RegistrationFormComponent implements OnInit {
   public registrationForm: FormGroup;
   public yesterday = new Date();
   private permanentAddress: MarkerDetails;
-  private temporaryAddress: MarkerDetails;
+  public temporaryAddress: MarkerDetails;
 
   @Output()
   public readonly registrationDetailsSubmitted = new EventEmitter<
