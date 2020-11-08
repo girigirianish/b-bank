@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8">
   <button
-    *ngIf="showBulkButton | async"
+    *ngIf="showBulkButton"
     class="bulk-button"
     mat-raised-button
     color="primary"
@@ -9,7 +9,7 @@
     Send Sms to all
   </button>
   <button
-    *ngIf="showBulkButton | async"
+    *ngIf="showBulkButton"
     class="bulk-button"
     mat-raised-button
     color="primary"
@@ -28,19 +28,9 @@
       <td mat-cell *matCellDef="let doner">{{ doner.name }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let doner">{{ doner.email }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="blood_group">
       <th mat-header-cell *matHeaderCellDef>Blood Group</th>
       <td mat-cell *matCellDef="let doner">{{ doner.blood_group }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="contact_no">
-      <th mat-header-cell *matHeaderCellDef>Contact Number</th>
-      <td mat-cell *matCellDef="let doner">{{ doner.contact_no }}</td>
     </ng-container>
 
     <ng-container matColumnDef="permanent_address">
@@ -66,7 +56,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <div *ngIf="noData | async" class="no-records">No records found</div>
+  <div *ngIf="noData" class="no-records">No records found</div>
 
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"

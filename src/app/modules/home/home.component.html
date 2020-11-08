@@ -1,15 +1,44 @@
-<search-donor-form
-  [bloodGroupSeachBox]="bloodGroupSeachBox"
-  (donerSearchSubmitted)="donerSearchSubmitted($event)"
-></search-donor-form>
-<blood-bank-doners-list
-  [donorsInformation]="donorsFilteredList"
-  (sendSmsClicked)="sendSmsClicked($event)"
-  (sendEmailClicked)="sendEmailClicked($event)"
-  (sendBulkSmsClicked)="sendBulkSmsClicked($event)"
-  (sendBulkEmailClicked)="sendBulkEmailClicked($event)"
-></blood-bank-doners-list>
-<blood-bank-map
-  class="home-map-section"
-  [markerDetails]="markerDetails"
-></blood-bank-map>
+<div class="home-container">
+  <img
+    class="search-doner-img"
+    src="/assets/img/search-d.jpg"
+    alt="Search Doner"
+  />
+  <search-donor-form
+    [bloodGroupSeachBox]="bloodGroupSeachBox"
+    (donerSearchSubmitted)="donerSearchSubmitted($event)"
+  ></search-donor-form>
+</div>
+
+<div *ngIf="searched" class="search-result">
+  <div class="view-toggler">
+    <div></div>
+    <mat-button-toggle-group
+      class="view-toggler"
+      #group="matButtonToggleGroup"
+      [value]="selectedView"
+      (change)="viewChanged($event)"
+    >
+      <mat-button-toggle value="table" aria-label="Text align left">
+        <mat-icon>list</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="map" aria-label="Text align center">
+        <mat-icon> map</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <blood-bank-doners-list
+    *ngIf="selectedView === 'table'"
+    [donorsInformation]="donorsFilteredList"
+    (sendSmsClicked)="sendSmsClicked($event)"
+    (sendEmailClicked)="sendEmailClicked($event)"
+    (sendBulkSmsClicked)="sendBulkSmsClicked($event)"
+    (sendBulkEmailClicked)="sendBulkEmailClicked($event)"
+  ></blood-bank-doners-list>
+  <blood-bank-map
+    *ngIf="selectedView === 'map'"
+    class="home-map-section"
+    [markerDetails]="markerDetails"
+  ></blood-bank-map>
+</div>

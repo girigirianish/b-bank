@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DonerSearchQuery, DonorService } from '../donor/services';
 import { DonorsInformation } from '../donor/models';
 import { MarkerDetails } from '../map/components/map/map.component';
@@ -14,14 +14,17 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'blood-bank-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
-  public donorsFilteredList: DonorsInformation[];
+  public donorsFilteredList: DonorsInformation[] = [];
   public markerDetails: MarkerDetails[] = [];
   public readonly districtSearchBox: SearchSelectBoxModel[] = DISTRICT_SELECT_BOX_ITEMS;
   public bloodGroupSeachBox: SearchSelectBoxModel[] = BLOOD_GROUP_TYPE_SELECT_BOX_ITEMS;
   public selectedDistrict: string;
   public selectedBloodGroupType: string;
+  public selectedView = 'table';
+  public searched = false;
 
   constructor(
     private readonly donerService: DonorService,
@@ -58,6 +61,7 @@ export class HomeComponent implements OnInit {
     searchQuery: DonerSearchQuery
   ): Promise<void> {
     try {
+      this.searched = true;
       const searchResponse = await this.donerService.searchDoner(searchQuery);
       this.donorsFilteredList = searchResponse;
       if (!this.donorsFilteredList.length) {
@@ -129,5 +133,9 @@ export class HomeComponent implements OnInit {
         'Something went wrong! Please try again after some time'
       );
     }
+  }
+
+  public viewChanged(changedView): void {
+    this.selectedView = changedView.value;
   }
 }

@@ -46,7 +46,7 @@ import { MapModule } from './modules/map';
         if (environment.production) {
           return 'http://bloodb.sevadev.com/admin/api';
         }
-        return 'http://dev-bloodb.sevadev.com/admin/api';
+        return '/api/admin/api';
       },
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiSecretInterceptor, multi: true },
