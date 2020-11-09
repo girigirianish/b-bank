@@ -3,8 +3,8 @@ variables:
   DOC_DIR: documentation/*
 
 stages:
-  - check-unit-test
   - build
+  - check-unit-test
   - generate-doc
   - deploy-dev
   - check-e2e-dev
@@ -52,6 +52,9 @@ generate-doc:
 
 check-unit-test:
   stage: check-unit-test
+  only:
+    - master
+    - develop
   image: trion/ng-cli-karma
   script:
     - npm ci
