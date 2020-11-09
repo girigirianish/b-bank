@@ -52,7 +52,7 @@ generate-doc:
 
 check-unit-test:
   stage: check-unit-test
-  image: node:latest
+  image: trion/ng-cli-karma
   script:
     - npm ci
     - npm run test:ci
