@@ -26,7 +26,7 @@ fdescribe('BloodGroupService', () => {
     });
     injector = getTestBed();
     service = TestBed.inject(BloodGroupService);
-    httpMock = injector.get(HttpTestingController);
+    httpMock = injector.inject(HttpTestingController);
   });
 
   it('should be created', () => {

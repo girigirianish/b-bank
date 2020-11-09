@@ -26,7 +26,7 @@ fdescribe('PagesService', () => {
     });
     injector = getTestBed();
     service = TestBed.inject(PagesService);
-    httpMock = injector.get(HttpTestingController);
+    httpMock = injector.inject(HttpTestingController);
   });
 
   it('should be created', () => {

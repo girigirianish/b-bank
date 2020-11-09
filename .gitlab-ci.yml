@@ -5,6 +5,7 @@ variables:
 stages:
   - build
   - generate-doc
+  - check-unit-test
   - deploy-dev
   - check-e2e-dev
   - build-prod
@@ -48,6 +49,15 @@ generate-doc:
   artifacts:
     paths:
       - documentation
+
+check-unit-test:
+  stage: check-unit-test
+  only:
+    - master
+    - develop
+  image: node:latest
+  script:
+    - npm run test:ci
 
 deploy-prod:
   stage: deploy-prod

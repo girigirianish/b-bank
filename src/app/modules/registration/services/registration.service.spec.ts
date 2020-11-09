@@ -26,7 +26,7 @@ fdescribe('RegistrationService', () => {
     });
     injector = getTestBed();
     service = TestBed.inject(RegistrationService);
-    httpMock = injector.get(HttpTestingController);
+    httpMock = injector.inject(HttpTestingController);
   });
 
   it('should be created', () => {
