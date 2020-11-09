@@ -3,9 +3,9 @@ variables:
   DOC_DIR: documentation/*
 
 stages:
+  - check-unit-test
   - build
   - generate-doc
-  - check-unit-test
   - deploy-dev
   - check-e2e-dev
   - build-prod
@@ -52,11 +52,9 @@ generate-doc:
 
 check-unit-test:
   stage: check-unit-test
-  only:
-    - master
-    - develop
   image: node:latest
   script:
+    - npm ci
     - npm run test:ci
 
 deploy-prod:
