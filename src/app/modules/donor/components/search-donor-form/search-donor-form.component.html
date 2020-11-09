@@ -20,7 +20,7 @@
     </mat-form-field>
 
     <mat-form-field class="search-field" appearance="fill">
-      <mat-label>Name</mat-label>
+      <mat-label>Blood Seeker Name</mat-label>
       <input
         formControlName="bloodSeekerName"
         matInput
@@ -35,7 +35,7 @@
     </mat-form-field>
 
     <mat-form-field class="search-field" appearance="fill">
-      <mat-label>Address</mat-label>
+      <mat-label>Doner address</mat-label>
       <input
         formControlName="donorAddress"
         matInput
@@ -64,14 +64,18 @@
       </mat-error>
 
       <mat-error
-        *ngIf="searchDonerForm.get('contactNumber').hasError('minlength')"
+        *ngIf="
+          searchDonerForm.get('contactNumber').hasError('minlength') ||
+          searchDonerForm.get('contactNumber').hasError('maxlength')
+        "
       >
-        Contact Number must be at least 10 characters long.
+        Contact Number should be exact 10 characters long.
       </mat-error>
     </mat-form-field>
 
     <mat-card-actions class="search-field">
       <button mat-raised-button (click)="searchDoner()" color="primary">
+        <mat-icon>search</mat-icon>
         Search
       </button>
     </mat-card-actions>

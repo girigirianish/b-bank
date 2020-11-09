@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DonerSearchQuery, DonorService } from '../donor/services';
 import { DonorsInformation } from '../donor/models';
 import { MarkerDetails } from '../map/components/map/map.component';
@@ -14,14 +14,17 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'blood-bank-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
-  public donorsFilteredList: DonorsInformation[];
+  public donorsFilteredList: DonorsInformation[] = [];
   public markerDetails: MarkerDetails[] = [];
   public readonly districtSearchBox: SearchSelectBoxModel[] = DISTRICT_SELECT_BOX_ITEMS;
   public bloodGroupSeachBox: SearchSelectBoxModel[] = BLOOD_GROUP_TYPE_SELECT_BOX_ITEMS;
   public selectedDistrict: string;
   public selectedBloodGroupType: string;
+  public selectedView = 'table';
+  public searched = false;
 
   constructor(
     private readonly donerService: DonorService,
@@ -58,6 +61,7 @@ export class HomeComponent implements OnInit {
     searchQuery: DonerSearchQuery
   ): Promise<void> {
     try {
+      this.searched = true;
       const searchResponse = await this.donerService.searchDoner(searchQuery);
       this.donorsFilteredList = searchResponse;
       if (!this.donorsFilteredList.length) {
@@ -65,7 +69,14 @@ export class HomeComponent implements OnInit {
         return;
       }
       this.prepareMarkerDetails();
-    } catch (_) {
+    } catch (e) {
+      if (e.error) {
+        const errors = Object.values(e.error);
+        if (errors.length && Array.isArray(errors[0])) {
+          this.toast.error(errors[0][0]);
+          return;
+        }
+      }
       this.toast.error(
         'Something went wrong! Please try again after some time'
       );
@@ -95,18 +106,36 @@ export class HomeComponent implements OnInit {
   }
 
   public async sendBulkSmsClicked(ids: number[]): Promise<void> {
-    const smsPromises = ids.map((id) => {
-      return this.donerService.sendSmsToDoner(id);
-    });
+    try {
+      const smsPromises = ids.map((id) => {
+        return this.donerService.sendSmsToDoner(id);
+      });
 
-    await Promise.all(smsPromises);
+      await Promise.all(smsPromises);
+      this.toast.success('Sms were sent successfully.');
+    } catch (_) {
+      this.toast.error(
+        'Something went wrong! Please try again after some time'
+      );
+    }
   }
 
   public async sendBulkEmailClicked(ids: number[]): Promise<void> {
-    const smsPromises = ids.map((id) => {
-      return this.donerService.sendEmailToDoner(id);
-    });
+    try {
+      const smsPromises = ids.map((id) => {
+        return this.donerService.sendEmailToDoner(id);
+      });
 
-    await Promise.all(smsPromises);
+      await Promise.all(smsPromises);
+      this.toast.success('Emails were sent successfully.');
+    } catch (_) {
+      this.toast.error(
+        'Something went wrong! Please try again after some time'
+      );
+    }
+  }
+
+  public viewChanged(changedView): void {
+    this.selectedView = changedView.value;
   }
 }

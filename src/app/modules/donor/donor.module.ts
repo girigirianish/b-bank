@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [DonorListComponent, SearchDonorFormComponent],
@@ -21,6 +22,7 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   exports: [DonorListComponent, SearchDonorFormComponent],
 })

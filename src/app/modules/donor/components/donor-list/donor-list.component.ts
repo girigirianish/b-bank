@@ -5,20 +5,24 @@ import {
   Input,
   EventEmitter,
   Output,
+  OnInit,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DonorsInformation } from '../../models';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'blood-bank-doners-list',
   templateUrl: './donor-list.component.html',
   styleUrls: ['./donor-list.component.scss'],
 })
-export class DonorListComponent implements AfterViewInit {
+export class DonorListComponent implements AfterViewInit, OnInit {
   @Input() public set donorsInformation(newValue: DonorsInformation[]) {
-    this.dataSource.data = newValue || [];
+    setTimeout(() => {
+      this.dataSource.data = newValue;
+    });
   }
 
   @Output()
@@ -40,11 +44,9 @@ export class DonorListComponent implements AfterViewInit {
   public readonly displayedColumns: string[] = [
     'id',
     'name',
-    'email',
     'blood_group',
     'permanent_address',
     'temporary_address',
-    'contact_no',
     'action',
   ];
 
@@ -52,15 +54,27 @@ export class DonorListComponent implements AfterViewInit {
     DonorsInformation
   > = new MatTableDataSource<DonorsInformation>();
 
-  public noData: any = this.dataSource
+  private $noData: Observable<any> = this.dataSource
     .connect()
     .pipe(map((data) => data.length === 0));
 
-  public showBulkButton: any = this.dataSource
+  private $showBulkButton: Observable<any> = this.dataSource
     .connect()
     .pipe(map((data) => data.length > 1));
 
+  public noData = false;
+  public showBulkButton = false;
+
   @ViewChild(MatPaginator) public paginator: MatPaginator;
+
+  ngOnInit(): void {
+    this.$noData.subscribe((isNoData) =>
+      setTimeout(() => (this.noData = isNoData))
+    );
+    this.$showBulkButton.subscribe((showButton) =>
+      setTimeout(() => (this.showBulkButton = showButton))
+    );
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.data = this.donorsInformation || [];

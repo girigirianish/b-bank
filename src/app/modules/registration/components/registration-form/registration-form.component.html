@@ -54,9 +54,12 @@
           </mat-error>
 
           <mat-error
-            *ngIf="registrationForm.get('phoneNumber').hasError('minlength')"
+            *ngIf="
+              registrationForm.get('phoneNumber').hasError('minlength') ||
+              registrationForm.get('phoneNumber').hasError('maxlength')
+            "
           >
-            Phone Number must be at least 10 characters long.
+            Phone Number should be exact 10 characters long.
           </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
