@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
       const searchResponse = await this.donerService.searchDoner(searchQuery);
       this.donorsFilteredList = searchResponse;
       if (!this.donorsFilteredList.length) {
-        this.toast.info('Sorry,no results found for you query.');
+        this.toast.info('Sorry,no results found for your query.');
         return;
       }
       this.prepareMarkerDetails();
