@@ -10,21 +10,7 @@ describe('RegistrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        MatToolbarModule,
-        MatCardModule,
-        MatInputModule,
-        MatSelectModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        ToastrModule,
-        MatCheckboxModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatDialogModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [],
       declarations: [RegistrationFormComponent],
       providers: [],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
