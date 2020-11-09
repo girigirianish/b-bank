@@ -1,4 +1,3 @@
-
 variables:
   DIST_DIR: dist/blood-bank-ng/*
   DOC_DIR: documentation/*
@@ -7,8 +6,10 @@ stages:
   - build
   - generate-doc
   - deploy-dev
+  - check-e2e-dev
   - build-prod
   - deploy-prod
+  - check-e2e-prod
 
 build:
   stage: build
@@ -77,3 +78,25 @@ deploy-dev:
   script:
     - scp -P 22020 -r -o StrictHostKeyChecking=no $DIST_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client-dev/html
     - scp -P 22020 -r -o StrictHostKeyChecking=no $DOC_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client-dev-doc/html
+
+check-e2e-dev:
+  stage: check-e2e-dev
+  only:
+    - develop
+  image: cypress/base:10
+  script:
+    - git clone http://${CYPRESS_E2E_REPO_USERNAME}:${CYPRESS_E2E_PERSONAL_TOKEN}@gitlab.com/blood-donation1/blood-bank-cypress.git
+    - cd blood-bank-cypress && git checkout develop
+    - npm ci
+    - npm run e2e:run
+
+check-e2e-prod:
+  stage: check-e2e-prod
+  only:
+    - master
+  image: cypress/base:10
+  script:
+    - git clone http://${CYPRESS_E2E_REPO_USERNAME}:${CYPRESS_E2E_PERSONAL_TOKEN}@gitlab.com/blood-donation1/blood-bank-cypress.git
+    - cd blood-bank-cypress && git checkout master
+    - npm ci
+    - npm run e2e:run

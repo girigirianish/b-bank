@@ -43,7 +43,10 @@ import { MapModule } from './modules/map';
     {
       provide: BLOOD_BANK_REST_URL,
       useFactory: () => {
-        return '/api/admin/api';
+        if (environment.production) {
+          return 'http://bloodb.sevadev.com/admin/api';
+        }
+        return 'http://dev-bloodb.sevadev.com/admin/api';
       },
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiSecretInterceptor, multi: true },
