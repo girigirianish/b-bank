@@ -4,8 +4,8 @@ variables:
 
 stages:
   - build
-  - check-unit-test
   - generate-doc
+  - check-unit-test
   - deploy-dev
   - check-e2e-dev
   - build-prod
@@ -57,7 +57,6 @@ check-unit-test:
     - develop
   image: trion/ng-cli-karma
   script:
-    - npm ci
     - npm run test:ci
 
 deploy-prod:
@@ -98,7 +97,6 @@ check-e2e-dev:
   script:
     - git clone http://${CYPRESS_E2E_REPO_USERNAME}:${CYPRESS_E2E_PERSONAL_TOKEN}@gitlab.com/blood-donation1/blood-bank-cypress.git
     - cd blood-bank-cypress && git checkout develop
-    - npm ci
     - npm run e2e:run
 
 check-e2e-prod:
@@ -109,5 +107,4 @@ check-e2e-prod:
   script:
     - git clone http://${CYPRESS_E2E_REPO_USERNAME}:${CYPRESS_E2E_PERSONAL_TOKEN}@gitlab.com/blood-donation1/blood-bank-cypress.git
     - cd blood-bank-cypress && git checkout master
-    - npm ci
     - npm run e2e:run
