@@ -80,7 +80,7 @@ deploy-dev:
     - scp -P 22020 -r -o StrictHostKeyChecking=no $DOC_DIR ubuntu@110.34.5.31:/var/www/blood-bank-client-dev-doc/html
 
 check-e2e-dev:
-  stage: check-e2e
+  stage: check-e2e-dev
   only:
     - develop
   image: cypress/base:10
@@ -91,7 +91,7 @@ check-e2e-dev:
     - npm run e2e:run
 
 check-e2e-prod:
-  stage: check-e2e
+  stage: check-e2e-prod
   only:
     - master
   image: cypress/base:10
