@@ -3,7 +3,6 @@ variables:
   DOC_DIR: documentation/*
 
 stages:
-  - check-e2e
   - build
   - generate-doc
   - deploy-dev
