@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  padding-bottom: 50px;
   .registration-form-card-title {
     text-align: center;
   }
@@ -20,10 +21,17 @@
 
 .address-box {
   display: flex;
+  justify-content: space-between;
+  
   .addressButton {
     margin-left: 10px;
+    background-color: #d2291e;
   }
   &.temporaray {
     margin-top: 20px;
   }
+}
+
+.mat-form-field-infix {
+  width: 285px;
 }

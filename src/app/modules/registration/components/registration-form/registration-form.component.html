@@ -1,7 +1,7 @@
 <div class="registration-form-card">
   <mat-card>
     <mat-card-title class="registration-form-card-title"
-      ><span>Save a Life Today!</span></mat-card-title
+      ><span class="card-title">Save a Life Today!</span></mat-card-title
     >
     <mat-card-content>
       <form
@@ -100,15 +100,17 @@
             </mat-error>
           </mat-form-field>
 
-          <button
-            type="button"
-            class="addressButton"
-            mat-raised-button
-            (click)="openMap('permanent')"
-            color="primary"
-          >
+          <mat-card-actions>
+            <button
+              type="button"
+              class="addressButton"
+              mat-raised-button
+              (click)="openMap('permanent')"
+              color="primary"
+            >
             Choose a permanent address
           </button>
+          </mat-card-actions>
         </div>
 
         <div class="address-box temporaray">
@@ -131,15 +133,18 @@
             </mat-error>
           </mat-form-field>
 
-          <button
-            type="button"
-            class="addressButton"
-            mat-raised-button
-            (click)="openMap('temporary')"
-            color="primary"
-          >
-            Choose a Temporary address
-          </button>
+          <mat-card-actions>
+            <button
+              type="button"
+              class="addressButton"
+              mat-raised-button
+              (click)="openMap('temporary')"
+              color="primary"
+            >
+              Choose a Temporary address
+            </button>
+          </mat-card-actions>
+        
         </div>
 
         <mat-form-field class="full-width">
@@ -161,7 +166,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-card-actions>
+        <mat-card-actions class="content-center">
           <button mat-raised-button (click)="register()" color="primary">
             Register
           </button>
