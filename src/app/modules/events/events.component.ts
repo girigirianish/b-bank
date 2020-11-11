@@ -31,7 +31,6 @@ export class EventsComponent implements OnInit {
       }
       return event;
     });
-    console.log(this.eventList);
   }
 
   public openDescriptionModal(item): void {
