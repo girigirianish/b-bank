@@ -1,4 +1,5 @@
-<div
+<div class="container">
+  <div
   class="content"
   fxLayout="row wrap"
   fxLayoutGap="16px grid"
@@ -14,7 +15,7 @@
   >
     <mat-card class="mat-elevation-z4">
       <mat-card-header>
-        <mat-card-title class="text-oneline">{{ item.title }}</mat-card-title>
+        <mat-card-title class="text-oneline title">{{ item.title }}</mat-card-title>
         <mat-card-subtitle>Held on: {{ item.event_date }}</mat-card-subtitle>
         <mat-card-subtitle>Venue: {{ item.meta_author }}</mat-card-subtitle>
       </mat-card-header>
@@ -29,16 +30,16 @@
 <ng-template #descriptionModal>
   <div fxLayout="row wrap" fxLayoutGap="16px grid" [style.margin-top]="'12px'">
     <div class="event-card" fxFlex.xs="100%">
-      <mat-card class="mat-elevation-z4">
+      <mat-card class="mat-elevation-z4 no-shadow">
         <mat-card-header>
-          <mat-card-title>{{ selectedCard.title }}</mat-card-title>
+          <mat-card-title class="title">{{ selectedCard.title }}</mat-card-title>
           <mat-card-subtitle
             >Held on: {{ selectedCard.event_date }}</mat-card-subtitle
           >
           <mat-card-subtitle
             >Venue: {{ selectedCard.meta_author }}</mat-card-subtitle
           >
-        </mat-card-header>
+        </mat-card-header>  
         <img mat-card-image [src]="selectedCard.photo" />
         <mat-card-content>
           <div [innerHTML]="selectedCard.content"></div>
@@ -47,3 +48,4 @@
     </div>
   </div>
 </ng-template>
+</div>
